@@ -11,13 +11,25 @@ namespace dotnet_rpg.Controllers
     [Route("api/[controller]")]
     public class CharacterController:ControllerBase
     {
-        private static Character knight = new Character();
+        private static List<Character> characters = new List<Character>
+        {
+            new Character(),
+            new Character {Id=1, Name ="Sam"}
+        }
+        ;
 
-        [HttpGet]
-        public ActionResult<Character> Get() {
+        [HttpGet("GetAll")]
+        public ActionResult<List<Character>> Get() {
              //return NotFound() 
             //return BadRequest()//
-            return Ok(knight);// status code: 200
+            return Ok(characters);// status code: 200
+        }
+
+          [HttpGet("{id}")]
+        public ActionResult<Character> GetSingle(int id) {
+             //return NotFound() 
+            //return BadRequest()//
+            return Ok(characters.FirstOrDefault(c=> c.Id == id)); // status code: 200
         }
     }
 }

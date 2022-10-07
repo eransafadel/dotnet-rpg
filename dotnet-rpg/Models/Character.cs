@@ -9,7 +9,7 @@ namespace  dotnet_rpg.Models{
 
     public class Character{
          public int Id {get;set;} =0;
-         public string name { get; set; }="Frodo";
+         public string Name { get; set; }="Frodo";
 
          public int HitPoints { get; set; } = 100;
 
