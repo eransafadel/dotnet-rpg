@@ -3,33 +3,38 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using dotnet_rpg.Models;
+using dotnet_rpg.Services.CharacterService;
 
 namespace dotnet_rpg.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class CharacterController:ControllerBase
+    public class CharacterController : ControllerBase
     {
-        private static List<Character> characters = new List<Character>
+        private readonly ICharacterService characterService;
+        public CharacterController(ICharacterService characterService)
         {
-            new Character(),
-            new Character {Id=1, Name ="Sam"}
+            this.characterService = characterService;
+
         }
-        ;
 
         [HttpGet("GetAll")]
-        public ActionResult<List<Character>> Get() {
-             //return NotFound() 
-            //return BadRequest()//
-            return Ok(characters);// status code: 200
+        public ActionResult<List<Character>> Get()
+        {
+
+            return Ok(characterService.GetAllCharacters());
         }
 
-          [HttpGet("{id}")]
-        public ActionResult<Character> GetSingle(int id) {
-             //return NotFound() 
-            //return BadRequest()//
-            return Ok(characters.FirstOrDefault(c=> c.Id == id)); // status code: 200
+        [HttpGet("{id}")]
+        public ActionResult<Character> GetSingle(int id)
+        {
+
+            return Ok(characterService.GetCharacterById(id));
+        }
+        [HttpPost]
+        public ActionResult<List<Character>> AddCharacter(Character newCharacter)
+        {
+            return Ok(characterService.AddCharacter(newCharacter));
         }
     }
 }
