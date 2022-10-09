@@ -1,14 +1,8 @@
-using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-
-
-namespace  dotnet_rpg.Models{
-
-    public class Character{
-         public int Id {get;set;} =0;
+namespace dotnet_rpg.Dtos.Character
+{
+    public class AddCharacterDto
+    {
+       
          public string Name { get; set; }="Frodo";
 
          public int HitPoints { get; set; } = 100;
@@ -21,5 +15,4 @@ namespace  dotnet_rpg.Models{
 
          public RpgClass Class { get; set; } = RpgClass.Knight;
     }
-
 }
